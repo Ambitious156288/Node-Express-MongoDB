@@ -16,9 +16,10 @@ router.get("/login", function (req, res) {
 router.post("/login", function (req, res) {
   const body = req.body;
 
-  if (body.login === login && body.password === password)
+  if (body.login === login && body.password === password) {
+    req.session.admin = 111111111111111111111;
     res.redirect("/admin");
-  else res.redirect("/login");
+  } else res.redirect("/login");
 });
 
 module.exports = router;
