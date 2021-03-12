@@ -1,5 +1,6 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const News = require("../models/news");
+const router = express.Router();
 
 router.all("*", (req, res, next) => {
   if (!req.session.admin) {
@@ -13,9 +14,17 @@ router.all("*", (req, res, next) => {
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  console.log(req.session.admin);
+  // console.log(req.session.admin);
+  // const newsData = new News({
+  //   title: "title",
+  //   description: "description",
+  // });
+  // newsData.save((err) => console.log(err));
+  res.render("admin/index", { title: "Admin" });
+});
 
-  res.render("admin", { title: "Admin" });
+router.get("/news/add", function (req, res, next) {
+  res.render("admin/news-form", { title: "Add news" });
 });
 
 module.exports = router;
