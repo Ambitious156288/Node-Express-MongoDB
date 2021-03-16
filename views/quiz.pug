@@ -22,3 +22,8 @@ block content
           li #{item.title} votes: #{item.vote} ( #{Math.round(item.vote/sum * 100)}% )
 
       p All Votes: #{sum}
+
+      <hr/>
+
+      li
+        a(href='/api')= 'JSON'
