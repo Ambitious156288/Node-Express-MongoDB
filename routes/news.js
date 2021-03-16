@@ -1,17 +1,16 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const News = require("../models/news");
 
-/* GET home page. */
 router.get("/", (req, res) => {
   const search = req.query.search;
 
-  const findeNews = News.find({ title: search }).sort({
+  const findNews = News.find({ title: search }).sort({
     created: -1,
   });
 
-  findeNews.exec((err, data) => {
-    res.render("news", { title: "News", data });
+  findNews.exec((err, data) => {
+    res.render("news", { title: "News", data, search });
   });
 });
 

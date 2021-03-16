@@ -5,26 +5,23 @@ const router = express.Router();
 router.all("*", (req, res, next) => {
   if (!req.session.admin) {
     res.redirect("login");
-
     return;
   }
 
   next();
 });
 
-/* GET home page. */
-router.get("/", function (req, res, next) {
+router.get("/", (req, res) => {
   News.find({}, (err, data) => {
-    console.log(data);
     res.render("admin/index", { title: "Admin", data });
   });
 });
 
-router.get("/news/add", function (req, res, next) {
+router.get("/news/add", (req, res) => {
   res.render("admin/news-form", { title: "Add news", body: {}, errors: {} });
 });
 
-router.post("/news/add", function (req, res, next) {
+router.post("/news/add", (req, res) => {
   const body = req.body;
 
   const newsData = new News(body);
@@ -42,7 +39,7 @@ router.post("/news/add", function (req, res, next) {
   });
 });
 
-router.get("/news/delete/:id", function (req, res, next) {
+router.get("/news/delete/:id", (req, res) => {
   News.findByIdAndDelete(req.params.id, (err) => {
     res.redirect("/admin");
   });
